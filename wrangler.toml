@@ -25,7 +25,6 @@ html_handling = "auto-trailing-slash"
 [observability.logs]
 enabled = true
 
-# Custom domain. Uncomment and edit after the first deploy:
-# [[routes]]
-# pattern = "docs.signalog.co"
-# custom_domain = true
+[[routes]]
+pattern = "docs.signalog.co"
+custom_domain = true
