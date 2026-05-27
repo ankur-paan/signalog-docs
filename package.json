@@ -1,0 +1,21 @@
+{
+  "name": "signalog-docs",
+  "version": "1.0.0",
+  "description": "Signalog documentation site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "worker:dev": "wrangler dev",
+    "worker:deploy": "npm run docs:build && wrangler deploy"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3",
+    "wrangler": "^3.96.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

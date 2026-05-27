@@ -1,0 +1,31 @@
+# Cloudflare Workers configuration for Signalog Docs.
+#
+# This serves the built VitePress site as a Worker with the new
+# "Static Assets" binding (see https://developers.cloudflare.com/workers/static-assets/).
+#
+# `npm run docs:build` produces docs/.vitepress/dist — Wrangler uploads that
+# directory and the Worker (worker.js) routes every request through it.
+
+name = "signalog-docs"
+main = "worker.js"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Static assets — uploaded from this directory on deploy.
+[assets]
+directory = "./docs/.vitepress/dist"
+binding = "ASSETS"
+# `single-page-application` would rewrite every miss to index.html. VitePress is MPA,
+# so we use `auto-trailing-slash` to let `/install/` map to `/install/index.html` and
+# `/install/nextjs` map to `/install/nextjs.html` (which is what `cleanUrls: true` produces).
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+
+# Observability — see hits/errors in the Cloudflare dashboard.
+[observability.logs]
+enabled = true
+
+# Custom domain. Uncomment and edit after the first deploy:
+# [[routes]]
+# pattern = "docs.signalog.co"
+# custom_domain = true
